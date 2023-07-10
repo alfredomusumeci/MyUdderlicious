@@ -94,7 +94,7 @@ def form():
                     if success:
                         return render_template('success.html', name=name)
                     else:
-                        return render_template('index.html', logged_in=logged_in, error_message=error_message)
+                        return render_template('index.html', logged_in=True, error_message=error_message)
                 else:
                     return redirect('/login')  # Redirect user to login if they haven't logged in yet
 
@@ -102,7 +102,7 @@ def form():
     start_date = session.get('start_date', '')
 
     # Render the form
-    return render_template('index.html', logged_in=logged_in, error_message=error_message, name=name,
+    return render_template('index.html', logged_in=True, error_message=error_message, name=name,
                            start_date=start_date)
 
 

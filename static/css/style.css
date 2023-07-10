@@ -11,6 +11,7 @@ body {
 }
 
 #buttonContainer {
+    background-color: #81C1D1;
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -33,14 +34,7 @@ body {
     transition: transform 0.5s ease-out;
     width: 100%;
     overflow: hidden;
-    position: fixed;
 }
-
-body.modal-open {
-    overflow: hidden;
-    position: fixed;
-}
-
 
 #logoutButton {
     margin-bottom: 15px;
@@ -49,7 +43,7 @@ body.modal-open {
 }
 
 body > div:nth-child(2) > div > div.col-md-10 {
-    padding-right: 0;
+    /*padding-right: 0;*/
 }
 
 body > div:nth-child(2) > div > div.col-md-2.d-flex {
@@ -67,6 +61,14 @@ body > div:nth-child(2) > div > div.col-md-2.d-flex {
     flex-shrink: 0;
     height: 4.5rem;
     z-index: 999;
+}
+
+#alerts-container{
+    position: relative;
+    /*margin-top: 20px;*/
+    /*top: 20px;*/
+    /*right: 0;*/
+    /*z-index: 999;*/
 }
 
 

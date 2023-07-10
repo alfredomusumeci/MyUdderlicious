@@ -16,7 +16,7 @@
         <button type="button" id="deleteButton" class="btn btn-danger">Delete Last 2 Weeks Shifts</button>
     </div>
 </div>
-    <div class="container">
+    <div id="alerts-container" class="container">
         <div class="row justify-content-center vh-100">
             <div class="col-md-10">
                 {% if logged_in %}
@@ -76,14 +76,14 @@
             // check if the user is logged in
             if(isLoggedIn) {
                 // if the user is logged in, don't animate the form
-                $("#buttonContainer").css("bottom", '70%');
+                $("#buttonContainer").css("bottom", '73%');
                 $("#formContainer").css("display", "block");
                 $("#formContainer").css("transform", "none");
             } else {
                 // if the user is not logged in, animate the form
                 var formVisible = false;
                 $("#accessButton").click(function(){
-                    $("#buttonContainer").animate({ bottom: '70%' }, 500);
+                    $("#buttonContainer").animate({ bottom: '73%' }, 500);
                     if (!formVisible) {
                         setTimeout(function() {
                             $("#formContainer").css("display", "block");
@@ -121,7 +121,7 @@
                         $("#deleteButton").prop("disabled", false).html("Delete Last 2 Weeks Shifts");
 
                         // Show error alert
-                        showAlert("Error deleting shifts: " + error);
+                        showAlert("Error deleting shifts: " + error, "info");
                     }
                 });
             });
