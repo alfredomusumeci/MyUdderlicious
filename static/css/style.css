@@ -32,7 +32,15 @@ body {
     transform: translateY(100vh);
     transition: transform 0.5s ease-out;
     width: 100%;
+    overflow: hidden;
+    position: fixed;
 }
+
+body.modal-open {
+    overflow: hidden;
+    position: fixed;
+}
+
 
 #logoutButton {
     margin-bottom: 15px;
@@ -49,7 +57,7 @@ body > div:nth-child(2) > div > div.col-md-2.d-flex {
 }
 
 .footer {
-    position: absolute;
+    position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;
@@ -58,6 +66,7 @@ body > div:nth-child(2) > div > div.col-md-2.d-flex {
     text-align: center;
     flex-shrink: 0;
     height: 4.5rem;
+    z-index: 999;
 }
 
 
