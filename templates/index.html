@@ -70,11 +70,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript">
         var isLoggedIn = {{ 'true' if logged_in else 'false' }};
+        var isError = {{ 'true' if error_message else 'false' }};
     </script>
     <script>
         $(document).ready(function(){
             // check if the user is logged in
-            if(isLoggedIn) {
+            if(isLoggedIn || isError) {
                 // if the user is logged in, don't animate the form
                 $("#buttonContainer").css("bottom", '73%');
                 $("#formContainer").css("display", "block");

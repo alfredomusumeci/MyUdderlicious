@@ -38,10 +38,14 @@ def process_df(df):
     df = df[df.apply(lambda row: type(row['start']) != str or row['start'].strip() != '', axis=1)]
     df = df.reset_index(drop=True)
 
+    df['name'] = df['name'].str.strip().str.lower()
+
     return df
 
 
 def filter_shifts(df, name, from_date):
+    name = name.strip().lower()
+
     my_shifts = df[df['name'] == name]
 
     if len(my_shifts) == 0:
@@ -75,6 +79,6 @@ def filter_shifts(df, name, from_date):
     return my_shifts, others
 
 
-
 def is_valid_name(name, df):
+    name = name.strip().lower()
     return name in df['name'].values
