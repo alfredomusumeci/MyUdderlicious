@@ -74,7 +74,13 @@ def form():
                 # Create the calendar and events only if the user has logged in
                 if logged_in:
                     # Create the calendar
-                    service = calendar.setup_google_api(session['oauth_token'])
+                    try:
+                        service = calendar.setup_google_api(session['oauth_token'])
+                    except ValueError as e:
+                        if str(e) == "Refresh token missing":
+                            return redirect('/login')
+                        else:
+                            raise e
 
                     # Create the events
                     try:
@@ -133,7 +139,13 @@ def callback():
         my_shifts, others = utils.filter_shifts(df, name, start_date)
         if my_shifts is not None:
             # Create the calendar
-            service = calendar.setup_google_api(session['oauth_token'])
+            try:
+                service = calendar.setup_google_api(session['oauth_token'])
+            except ValueError as e:
+                if str(e) == "Refresh token missing":
+                    return redirect('/login')
+                else:
+                    raise e
 
             # Create the events
             try:
@@ -164,7 +176,14 @@ def calendar_view():
 @requires_login
 def delete_events():
     if request.method == 'POST':
-        service = calendar.setup_google_api(session['oauth_token'])
+        # Create the calendar
+        try:
+            service = calendar.setup_google_api(session['oauth_token'])
+        except ValueError as e:
+            if str(e) == "Refresh token missing":
+                return redirect('/login')
+            else:
+                raise e
         calendar.delete_calendar_events(service)
         return redirect('/')  # Redirect to the homepage or any other desired page
 

@@ -7,11 +7,15 @@ EVENT_NAME = 'Udderlicious Shift'
 
 # Function to set up google API
 def setup_google_api(token):
-    # Create the credentials object
-    creds = credentials.Credentials(
-        token['access_token'],
-        refresh_token=token['refresh_token'],
-    )
+    # Check if 'refresh_token' is in the token dictionary
+    if 'refresh_token' in token:
+        creds = credentials.Credentials(
+            token['access_token'],
+            refresh_token=token['refresh_token'],
+        )
+    else:
+        # Raise a specific exception if refresh_token is not present
+        raise ValueError("Refresh token missing")
 
     return build('calendar', 'v3', credentials=creds)
 
