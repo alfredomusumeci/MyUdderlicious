@@ -1,3 +1,5 @@
 .env
 schedule.xlsx
 .idea
+secrets
+src/__pycache__
