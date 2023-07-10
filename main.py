@@ -109,8 +109,9 @@ def form():
 @app.route('/login')
 def login():
     google = OAuth2Session(OAUTH2_CLIENT_ID, redirect_uri=OAUTH2_REDIRECT_URI, scope=SCOPE)
-    authorization_url, state = google.authorization_url(AUTHORIZATION_BASE_URL, access_type='offline',
-                                                        prompt='select_account')
+    authorization_url, state = google.authorization_url(AUTHORIZATION_BASE_URL,
+                                                        access_type='offline',
+                                                        prompt='consent')
     session['oauth_state'] = state
     return redirect(authorization_url)
 
