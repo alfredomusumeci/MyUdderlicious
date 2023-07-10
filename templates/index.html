@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyUdderlicious</title>
     <link rel="icon" href="../static/resources/icon.png" type="image/png">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
@@ -56,6 +57,16 @@
         </div>
         {% endif %}
     </div>
+    <!-- Start of the Footer -->
+    <div class="footer">
+        <hr>
+        <p class="text-center">
+            <a href="/about">About The Developer</a> |
+            <a href="/privacy">Privacy Policy</a> |
+            <a href="/terms">Terms of Service</a>
+        </p>
+    </div>
+    <!-- End of the Footer -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript">
         var isLoggedIn = {{ 'true' if logged_in else 'false' }};
@@ -65,14 +76,14 @@
             // check if the user is logged in
             if(isLoggedIn) {
                 // if the user is logged in, don't animate the form
-                $("#buttonContainer").css("height", '30vh');
+                $("#buttonContainer").css("bottom", '70%');
                 $("#formContainer").css("display", "block");
                 $("#formContainer").css("transform", "none");
             } else {
                 // if the user is not logged in, animate the form
                 var formVisible = false;
                 $("#accessButton").click(function(){
-                    $("#buttonContainer").animate({ height: '30vh' }, 500);
+                    $("#buttonContainer").animate({ bottom: '70%' }, 500);
                     if (!formVisible) {
                         setTimeout(function() {
                             $("#formContainer").css("display", "block");
@@ -86,6 +97,12 @@
                 });
             }
             $("#deleteButton").click(function(){
+                if (!isLoggedIn) {
+                    // Display an alert if the user is not logged in
+                    alert("Login is required to delete calendar events.");
+                    return;
+                }
+
                 // Show loading icon
                 $("#deleteButton").prop("disabled", true).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Deleting...');
 

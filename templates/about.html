@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>About the Developer - MyUdderlicious</title>
+    <style>
+        body {
+            padding-top: 20px; /* Adjust this value to add more or less space at the top of the page */
+        }
+
+        .content {
+                background-color: #e7013859;
+                color: #ffffff;
+                padding: 20px;
+                margin: 0 auto;
+                width: 80%;
+                border-radius: 15px; /* Rounded corners */
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15); /* Shadow for a "lifted" look */
+                max-width: 800px; /* Maximum width to maintain readability on wide screens */
+                line-height: 1.6; /* Increased line-height for better text readability */
+        }
+    </style>
+    <link rel="icon" href="../static/resources/icon.png" type="image/png">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <div class="content">
+        <h1>About the Developer</h1>
+        <p>
+            My name is Alfredo Musumeci and I have built this website to help my fellow Udderlicious employees to
+            easily add their shifts to their calendar. Feel free to use this website if you are an Udderlicious employee (and if you are not,
+            you can still use it, but it won't be as useful to you). What can I say? I am a nice guy.
+        </p>
+        <p>
+            Feel free to reach out to me at:
+        </p>
+        <p>
+            Email: alfredo.msmeci@gmail.com <br/>
+            Phone: (+44) 7570326136
+        </p>
+    </div>
+    <div class="footer">
+        <hr>
+        <p class="text-center">
+            <a href="/about">About The Developer</a> |
+            <a href="/privacy">Privacy Policy</a> |
+            <a href="/terms">Terms of Service</a>
+        </p>
+    </div>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -189,5 +189,20 @@ def delete_events():
         return redirect('/')  # Redirect to the homepage or any other desired page
 
 
+@app.route('/privacy')
+def privacy():
+    return render_template('privacy.html')
+
+
+@app.route('/terms')
+def terms():
+    return render_template('terms.html')
+
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+
 if __name__ == '__main__':
-    app.run(host='localhost', port=5000, debug=True)
+    app.run(host='192.168.1.245', port=5000, debug=True)
