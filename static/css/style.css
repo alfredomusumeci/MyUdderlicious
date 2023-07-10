@@ -1,0 +1,51 @@
+body {
+    background-color: #81C1D1;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+#buttonContainer {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.5s ease-out;
+}
+
+.logo {
+    width: 70%;  /* Adjust this as needed to change logo size */
+    position: relative;
+}
+
+#buttonContainer.open {
+    top: 30%; /* Adjust the height at which the logo should stop sliding */
+}
+
+#formContainer {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    transform: translateY(100vh);
+    transition: transform 0.5s ease-out;
+    width: 100%;
+}
+
+#logoutButton {
+    margin-bottom: 15px;
+    margin-right: 15px;
+    width: 100%;
+}
+
+body > div:nth-child(2) > div > div.col-md-10 {
+    padding-right: 0;
+}
+
+body > div:nth-child(2) > div > div.col-md-2.d-flex {
+    padding-right: 0;
+}

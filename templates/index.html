@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>MyUdderlicious</title>
+    <link rel="icon" href="../static/resources/icon.png" type="image/png">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Add as many as you like -->
+    <div id="buttonContainer" class="text-center">
+    <img class="logo" src="../static/resources/logo_blank.png" alt="Logo">
+    <div>
+        <button type="button" id="accessButton" class="btn btn-primary">Download New Shifts</button>
+        <button type="button" id="deleteButton" class="btn btn-danger">Delete Last 2 Weeks Shifts</button>
+    </div>
+</div>
+    <div class="container">
+        <div class="row justify-content-center vh-100">
+            <div class="col-md-10">
+                {% if logged_in %}
+                <div class="alert alert-success alert-fill" role="alert">
+                    Successfully logged in!
+                </div>
+                {% endif %}
+            </div>
+            <div class="col-md-2 d-flex">
+                {% if logged_in %}
+                <button id="logoutButton" class="btn btn-danger">Logout</button>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div id="alertContainer" class="col-md-12"></div>
+        </div>
+    </div>
+    <div id="formContainer" class="container">
+        <form id="myForm" method="POST">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ name }}" required>
+            </div>
+            <div class="form-group">
+                <label for="start_date">Start Date:</label>
+                <input type="date" class="form-control" id="start_date" name="start_date" value="{{ date }}" required>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-light">Submit</button>
+            </div>
+        </form>
+        {% if error_message %}
+        <div class="alert alert-danger">
+            {{ error_message }}
+        </div>
+        {% endif %}
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        var isLoggedIn = {{ 'true' if logged_in else 'false' }};
+    </script>
+    <script>
+        $(document).ready(function(){
+            // check if the user is logged in
+            if(isLoggedIn) {
+                // if the user is logged in, don't animate the form
+                $("#buttonContainer").css("height", '30vh');
+                $("#formContainer").css("display", "block");
+                $("#formContainer").css("transform", "none");
+            } else {
+                // if the user is not logged in, animate the form
+                var formVisible = false;
+                $("#accessButton").click(function(){
+                    $("#buttonContainer").animate({ height: '30vh' }, 500);
+                    if (!formVisible) {
+                        setTimeout(function() {
+                            $("#formContainer").css("display", "block");
+                            $("#formContainer").css("transform", "translateY(100vh)");
+                            setTimeout(function() {
+                                $("#formContainer").css("transform", "translateY(0)");
+                            }, 100);
+                        }, 500);
+                        formVisible = true;
+                    }
+                });
+            }
+            $("#deleteButton").click(function(){
+                // Show loading icon
+                $("#deleteButton").prop("disabled", true).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Deleting...');
+
+                $.ajax({
+                    url: "/delete_events",
+                    type: "POST",
+                    success: function(response) {
+                        // Hide loading icon
+                        $("#deleteButton").prop("disabled", false).html("Delete Last 2 Weeks Shifts");
+
+                        // Show success alert
+                        showAlert("All your shifts have been deleted successfully", "success");
+                    },
+                    error: function(xhr, status, error) {
+                        // Hide loading icon
+                        $("#deleteButton").prop("disabled", false).html("Delete Last 2 Weeks Shifts");
+
+                        // Show error alert
+                        showAlert("Error deleting shifts: " + error);
+                    }
+                });
+            });
+            // Function to show an alert message
+            function showAlert(message, alertType) {
+                var alertClass = "alert-" + alertType;
+                var alertHtml = '<div class="alert ' + alertClass + ' alert-dismissible fade show" role="alert">' +
+                                message +
+                                '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                                '<span aria-hidden="true">&times;</span>' +
+                                '</button>' +
+                                '</div>';
+                $("#alertContainer").html(alertHtml);
+            }
+            $("#logoutButton").click(function(){
+                // Redirect to the logout route
+                window.location.href = "/logout";
+            });
+        });
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
